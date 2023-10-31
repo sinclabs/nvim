@@ -45,6 +45,7 @@ return {
 					"query",
 					"go",
 					"rust",
+					"kdl",
 				},
 				incremental_selection = {
 					enable = true,

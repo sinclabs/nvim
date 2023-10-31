@@ -6,11 +6,11 @@ return {
 		require("bufferline").setup({
 			options = {
 				mode = "buffer",
-				separator_style = "slant",
+				separator_style = "thick",
+				themable = true,
 				offsets = {
 					{
 						filetype = "NvimTree",
-						text = "File Explorer",
 						text_align = "center",
 						separator = true,
 					},

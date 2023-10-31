@@ -18,3 +18,18 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		end
 	end,
 })
+
+local kitty_group = vim.api.nvim_create_augroup("kitty_ag", { clear = true })
+vim.api.nvim_create_autocmd("VimLeave", {
+	callback = function()
+		os.execute("kitty @ --to unix:/tmp/mykitty-" .. vim.env.KITTY_PID .. " set-spacing padding=8")
+	end,
+	group = kitty_group,
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		os.execute("kitty @ --to unix:/tmp/mykitty-" .. vim.env.KITTY_PID .. " set-spacing padding=0")
+	end,
+	group = kitty_group,
+})
