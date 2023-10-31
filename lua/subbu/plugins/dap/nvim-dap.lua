@@ -224,11 +224,13 @@ return {
 				},
 			},
 		})
+		require("dap")
 
-		vim.fn.sign_define(
-			"DapBreakpoint",
-			{ text = "🔴", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
-		)
+		local sign = vim.fn.sign_define
+
+		sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+		sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+		sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
 
 		vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 	end,
