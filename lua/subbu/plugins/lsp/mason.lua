@@ -61,7 +61,11 @@ return {
 				"gomodifytags",
 				"gotests",
 				"delve",
+				"codelldb",
+				"js-debug-adapter",
+				"node-debug2-adapter",
 			},
+			automatic_installation = true,
 		})
 	end,
 }

@@ -17,6 +17,8 @@ return {
 					enable_ui = true, -- enable nvim-dap-ui
 				},
 				which_key = true,
+				window_picker = true,
+				lsp_saga = true,
 			},
 		})
 		-- load the colorscheme here
