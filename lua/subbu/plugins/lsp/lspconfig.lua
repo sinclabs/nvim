@@ -3,6 +3,9 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
+		"simrat39/rust-tools.nvim",
+		"mfussenegger/nvim-dap",
+		"nvim-lua/plenary.nvim",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 	config = function()
@@ -12,9 +15,8 @@ return {
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-		local keymap = vim.keymap -- for conciseness
-
 		local opts = { noremap = true, silent = true }
+		local keymap = vim.keymap -- for conciseness
 		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
 
@@ -195,6 +197,30 @@ return {
 			},
 			init_options = {
 				usePlaceholders = true,
+			},
+		})
+
+		-- Update this path
+		local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.10.0/"
+		local codelldb_path = extension_path .. "adapter/codelldb"
+		local liblldb_path = extension_path .. "lldb/lib/liblldb"
+		local this_os = vim.loop.os_uname().sysname
+
+		-- The path in windows is different
+		if this_os:find("Windows") then
+			codelldb_path = extension_path .. "adapter\\codelldb.exe"
+			liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
+		else
+			-- The liblldb extension is .so for linux and .dylib for macOS
+			liblldb_path = liblldb_path .. (this_os == "Linux" and ".so" or ".dylib")
+		end
+		local rt = require("rust-tools")
+		rt.setup({
+			server = {
+				on_attach = on_attach,
+			},
+			dap = {
+				adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
 			},
 		})
 
