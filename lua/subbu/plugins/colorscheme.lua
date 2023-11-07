@@ -19,6 +19,8 @@ return {
 				which_key = true,
 				window_picker = true,
 				lsp_saga = true,
+				lsp_trouble = true,
+				noice = true,
 			},
 		})
 		-- load the colorscheme here

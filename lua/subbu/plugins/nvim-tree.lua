@@ -1,6 +1,19 @@
 return {
 	"nvim-tree/nvim-tree.lua",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		{
+			"s1n7ax/nvim-window-picker",
+			name = "window-picker",
+			version = "2.*",
+			config = function()
+				require("window-picker").setup({
+					hint = "floating-big-letter",
+					show_prompt = false,
+				})
+			end,
+		},
+	},
 	config = function()
 		local nvimtree = require("nvim-tree")
 
@@ -39,6 +52,10 @@ return {
 			actions = {
 				open_file = {
 					resize_window = true,
+					window_picker = {
+						enable = true,
+						picker = require("window-picker").pick_window,
+					},
 				},
 			},
 			renderer = {

@@ -43,6 +43,9 @@ return {
 			opts.desc = "Show buffer diagnostics"
 			keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
 
+			opts.desc = "Toggle Trouble diagnostics"
+			keymap.set("n", "<leader>T", "<cmd>TroubleToggle <CR>", opts) -- show  diagnostics for file
+
 			opts.desc = "Show line diagnostics"
 			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
@@ -179,6 +182,15 @@ return {
 						shadow = true,
 					},
 					staticcheck = true,
+					hints = {
+						assignVariableTypes = true,
+						compositeLiteralFields = true,
+						compositeLiteralTypes = true,
+						constantValues = true,
+						functionTypeParameters = true,
+						parameterNames = true,
+						rangeVariableTypes = true,
+					},
 				},
 			},
 			init_options = {
