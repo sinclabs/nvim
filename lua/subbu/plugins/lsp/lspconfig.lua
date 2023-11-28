@@ -172,33 +172,33 @@ return {
 			},
 		})
 
-		lspconfig["gopls"].setup({
-			cmd = { "gopls" },
-			on_attach = on_attach,
-			capabilities = capabilities,
-			settings = {
-				gopls = {
-					experimentalPostfixCompletions = true,
-					analyses = {
-						unusedparams = true,
-						shadow = true,
-					},
-					staticcheck = true,
-					hints = {
-						assignVariableTypes = true,
-						compositeLiteralFields = true,
-						compositeLiteralTypes = true,
-						constantValues = true,
-						functionTypeParameters = true,
-						parameterNames = true,
-						rangeVariableTypes = true,
-					},
-				},
-			},
-			init_options = {
-				usePlaceholders = true,
-			},
-		})
+		-- lspconfig["gopls"].setup({
+		-- 	cmd = { "gopls" },
+		-- 	on_attach = on_attach,
+		-- 	capabilities = capabilities,
+		-- 	settings = {
+		-- 		gopls = {
+		-- 			experimentalPostfixCompletions = true,
+		-- 			analyses = {
+		-- 				unusedparams = true,
+		-- 				shadow = true,
+		-- 			},
+		-- 			staticcheck = true,
+		-- 			hints = {
+		-- 				assignVariableTypes = true,
+		-- 				compositeLiteralFields = true,
+		-- 				compositeLiteralTypes = true,
+		-- 				constantValues = true,
+		-- 				functionTypeParameters = true,
+		-- 				parameterNames = true,
+		-- 				rangeVariableTypes = true,
+		-- 			},
+		-- 		},
+		-- 	},
+		-- 	init_options = {
+		-- 		usePlaceholders = true,
+		-- 	},
+		-- })
 
 		-- Update this path
 		local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.10.0/"

@@ -12,6 +12,7 @@ return {
 			integrations = {
 				harpoon = true,
 				nvimtree = true,
+				notify = true,
 				dap = {
 					enabled = true,
 					enable_ui = true, -- enable nvim-dap-ui
