@@ -9,6 +9,10 @@ return {
 				shade = "dark",
 				percentage = 0.50, -- percentage of the shade to apply to the inactive window
 			},
+			styles = {
+				functions = { "italic" },
+				properties = { "italic" },
+			},
 			integrations = {
 				harpoon = true,
 				nvimtree = true,
@@ -22,6 +26,12 @@ return {
 				lsp_saga = true,
 				lsp_trouble = true,
 				noice = true,
+				octo = true,
+				indent_blankline = {
+					enabled = true,
+					scope_color = "surface2", -- catppuccin color (eg. `lavender`) Default: text
+					colored_indent_levels = false,
+				},
 			},
 		})
 		-- load the colorscheme here

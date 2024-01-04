@@ -6,6 +6,8 @@ return {
 				kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
 			},
 		})
+
+		vim.keymap.set({ "n", "t" }, "<C-t>", "<cmd>Lspsaga term_toggle<CR>")
 	end,
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",

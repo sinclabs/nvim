@@ -151,6 +151,15 @@ return {
 			on_attach = on_attach,
 		})
 
+		lspconfig["eslint"].setup({
+			capabilities = capabilities,
+			setup = {
+				workingDirectory = {
+					mode = "location",
+				},
+			},
+		})
+
 		-- configure lua server (with special settings)
 		lspconfig["lua_ls"].setup({
 			capabilities = capabilities,
