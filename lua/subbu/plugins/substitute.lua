@@ -8,25 +8,25 @@ return {
 		local keymap = vim.keymap
 		keymap.set(
 			"n",
-			"s",
+			"r",
 			substitue.operator,
 			{ noremap = true, desc = "Substitue at provided motion with default register" }
 		)
 		keymap.set(
 			"n",
-			"ss",
+			"rr",
 			substitue.line,
 			{ noremap = true, desc = "Substitute the current line with default register" }
 		)
 		keymap.set(
 			"n",
-			"S",
+			"R",
 			substitue.eol,
 			{ noremap = true, desc = "Substitute until end of line with default register" }
 		)
 		keymap.set(
 			"x",
-			"s",
+			"r",
 			substitue.visual,
 			{ noremap = true, desc = "Substitute in visual mode  with default register" }
 		)

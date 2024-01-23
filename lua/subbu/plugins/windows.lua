@@ -4,6 +4,9 @@ end
 
 return {
 	"anuvyklack/windows.nvim",
+	-- Comment the next two lines to activate
+	lazy = true,
+	event = {},
 	dependencies = {
 		"anuvyklack/middleclass",
 		"anuvyklack/animation.nvim",

@@ -12,7 +12,7 @@ return {
 			lsp_cfg = true,
 			lsp_gofumpt = true,
 			trouble = true,
-			build_tags = "e2e",
+			build_tags = "e2e,integration",
 			lsp_keymaps = function(bufnr)
 				local opts = { noremap = true, silent = true }
 				local keymap = vim.keymap -- for conciseness
@@ -20,7 +20,7 @@ return {
 
 				-- set keybinds
 				opts.desc = "Show LSP references"
-				keymap.set("n", "gR", "<cmd>Lspsaga finder references<CR>", opts) -- show definition, references
+				keymap.set("n", "gR", "<cmd>Lspsaga finder ref<CR>", opts) -- show definition, references
 
 				opts.desc = "Go to declaration"
 				keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
@@ -29,7 +29,7 @@ return {
 				keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", opts) -- show lsp definitions
 
 				opts.desc = "Show LSP implementations"
-				keymap.set("n", "gi", "<cmd>Lspsaga finder implementations<CR>", opts) -- show lsp implementations
+				keymap.set("n", "gi", "<cmd>Lspsaga finder imp<CR>", opts) -- show lsp implementations
 
 				opts.desc = "Show LSP type definitions"
 				keymap.set("n", "gt", "<cmd>Lspsaga goto_type_definitions<CR>", opts) -- show lsp type definitions

@@ -6,8 +6,8 @@ return {
 		require("catppuccin").setup({
 			dim_inactive = {
 				enabled = true, -- dims the background color of inactive window
-				shade = "dark",
-				percentage = 0.50, -- percentage of the shade to apply to the inactive window
+				shade = "light",
+				percentage = 0.25, -- percentage of the shade to apply to the inactive window
 			},
 			styles = {
 				functions = { "italic" },
@@ -32,9 +32,11 @@ return {
 					scope_color = "surface2", -- catppuccin color (eg. `lavender`) Default: text
 					colored_indent_levels = false,
 				},
+				beacon = true,
 			},
 		})
 		-- load the colorscheme here
+		vim.o.termguicolors = true
 		vim.cmd([[colorscheme catppuccin-mocha]])
 	end,
 }

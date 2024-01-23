@@ -1,5 +1,9 @@
 return {
 	"akinsho/bufferline.nvim",
+	-- Comment the next two lines
+	-- to enable the plugin
+	lazy = true,
+	event = {},
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	version = "*",
 	config = function()
