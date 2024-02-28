@@ -1,6 +1,7 @@
 return {
 	{
 		"vidocqh/auto-indent.nvim",
+		lazy = true,
 		config = function()
 			require("auto-indent").setup({
 				---@param lnum: number

@@ -32,8 +32,18 @@ return {
 					scope_color = "surface2", -- catppuccin color (eg. `lavender`) Default: text
 					colored_indent_levels = false,
 				},
+				illuminate = {
+					enabled = true,
+					lsp = true,
+				},
 				beacon = true,
+				neogit = true,
 			},
+			custom_highlights = function(colors)
+				return {
+					Folded = { bg = colors.mantle },
+				}
+			end,
 		})
 		-- load the colorscheme here
 		vim.o.termguicolors = true

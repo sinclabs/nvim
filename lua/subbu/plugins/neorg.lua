@@ -1,5 +1,6 @@
 return {
 	"nvim-neorg/neorg",
+	ft = "norg",
 	build = ":Neorg sync-parsers",
 	run = ":Neorg sync-parsers",
 	dependencies = { "nvim-lua/plenary.nvim" },
@@ -12,6 +13,7 @@ return {
 					config = {
 						workspaces = {
 							notes = "~/dev/notes",
+							journal = "~/dev/notes/journal",
 						},
 					},
 				},
