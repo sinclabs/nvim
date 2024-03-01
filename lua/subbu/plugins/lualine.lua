@@ -1,9 +1,11 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = { "nvim-tree/nvim-web-devicons", "nvimdev/lspsaga.nvim" },
 	config = function()
 		local lualine = require("lualine")
 		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
+
+		local theme = require("catppuccin.palettes").get_palette()
 
 		local function show_macro_recording()
 			local recording_register = vim.fn.reg_recording()
@@ -12,6 +14,18 @@ return {
 			else
 				return "󰪥 Recording @" .. recording_register
 			end
+		end
+
+		local function has_breadcrumbs()
+			return require("lspsaga.symbol.winbar").get_bar() ~= nil
+		end
+
+		local function get_breadcrumbs()
+			return require("lspsaga.symbol.winbar").get_bar()
+		end
+
+		local function show_modified()
+			return vim.bo.modified and "●" or ""
 		end
 
 		-- configure lualine with modified theme
@@ -23,20 +37,56 @@ return {
 				globalstatus = true,
 			},
 			sections = {
+				lualine_c = {
+					{
+						"filename",
+						symbols = { modified = "●" },
+					},
+				},
 				lualine_x = {
 					{
 						"macro-recording",
 						fmt = show_macro_recording,
-						color = { fg = "#f38ba8" },
+						color = { fg = theme.red },
 					},
 					{
 						lazy_status.updates,
 						cond = lazy_status.has_updates,
-						color = { fg = "#ff9e64" },
+						color = { fg = theme.peach },
 					},
 					{ "encoding" },
 					{ "fileformat" },
 					{ "filetype" },
+				},
+			},
+			extensions = { "lazy", "fugitive", "nvim-dap-ui", "oil", "nvim-tree", "trouble" },
+			winbar = {
+				lualine_b = {
+					{
+						"modified",
+						fmt = show_modified,
+						color = { fg = theme.blue, bg = theme.base },
+					},
+				},
+				lualine_c = {
+					{
+						"breadcrumbs",
+						fmt = get_breadcrumbs,
+						cond = has_breadcrumbs,
+					},
+				},
+			},
+			inactive_winbar = {
+				lualine_a = {
+					{
+						"filename",
+						path = 1,
+						color = { fg = theme.blue, bg = theme.base },
+						symbols = { modified = "●" },
+						cond = function()
+							return vim.bo.modified
+						end,
+					},
 				},
 			},
 		})

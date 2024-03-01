@@ -1,7 +1,7 @@
 return {
 	"github/copilot.vim",
 	lazy = true,
-	event = "BufReadPre",
+	event = "BufEnter",
 	config = function()
 		vim.keymap.set("i", "<Tab>", function()
 			if require("copilot.suggestion").is_visible() then
