@@ -1,40 +1,62 @@
+local function show_macro_recording()
+	local recording_register = vim.fn.reg_recording()
+	if recording_register == "" then
+		return ""
+	else
+		return "󰪥 Recording @" .. recording_register
+	end
+end
+
+local function has_breadcrumbs()
+	return require("lspsaga.symbol.winbar").get_bar() ~= nil
+end
+
+local function get_breadcrumbs()
+	return require("lspsaga.symbol.winbar").get_bar()
+end
+
+local function show_modified()
+	return vim.bo.modified and "●" or ""
+end
+
+local function get_modified_buffers_status()
+	local buffers = vim.api.nvim_list_bufs()
+
+	local modified_count = 0
+	for _, buf in ipairs(buffers) do
+		if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_option(buf, "modified") then
+			modified_count = modified_count + 1
+		end
+	end
+
+	if modified_count > 0 then
+		return "● " .. modified_count .. " modified buffer(s)"
+	end
+
+	return nil
+end
+
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons", "nvimdev/lspsaga.nvim" },
 	config = function()
 		local lualine = require("lualine")
 		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
-
 		local theme = require("catppuccin.palettes").get_palette()
 
-		local function show_macro_recording()
-			local recording_register = vim.fn.reg_recording()
-			if recording_register == "" then
-				return ""
-			else
-				return "󰪥 Recording @" .. recording_register
-			end
-		end
-
-		local function has_breadcrumbs()
-			return require("lspsaga.symbol.winbar").get_bar() ~= nil
-		end
-
-		local function get_breadcrumbs()
-			return require("lspsaga.symbol.winbar").get_bar()
-		end
-
-		local function show_modified()
-			return vim.bo.modified and "●" or ""
-		end
-
-		-- configure lualine with modified theme
-		lualine.setup({
+		require("lualine").setup({
 			options = {
 				theme = "catppuccin",
 				component_separators = { left = "|", right = "|" },
 				section_separators = { left = "", right = "" },
 				globalstatus = true,
+				disabled_filetypes = {
+					winbar = {
+						"NvimTree",
+						"Trouble",
+						"Outline",
+					},
+				},
 			},
 			sections = {
 				lualine_c = {
@@ -48,6 +70,11 @@ return {
 						"macro-recording",
 						fmt = show_macro_recording,
 						color = { fg = theme.red },
+					},
+					{
+						"modified_buffers",
+						fmt = get_modified_buffers_status,
+						color = { fg = theme.yellow },
 					},
 					{
 						lazy_status.updates,
@@ -74,10 +101,19 @@ return {
 						fmt = get_breadcrumbs,
 						cond = has_breadcrumbs,
 					},
+					{
+						"filename",
+						path = 1,
+						file_status = false,
+						cond = function()
+							return not has_breadcrumbs()
+						end,
+						color = { fg = theme.blue },
+					},
 				},
 			},
 			inactive_winbar = {
-				lualine_a = {
+				lualine_c = {
 					{
 						"filename",
 						path = 1,
